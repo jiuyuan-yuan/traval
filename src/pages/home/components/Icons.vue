@@ -19,54 +19,20 @@
 
 <script>
 export default {
+  props: {
+    list: Array
+  },
   data () {
     return {
       swiperOption: {
         autoplay: 0
-      },
-      iconList: [{
-        id: '001',
-        url: 'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
-        desc: '热门景点'
-      }, {
-        id: '002',
-        url: 'http://img1.qunarzz.com/piao/fusion/1804/5a/13ceb38dcf262f02.png',
-        desc: '一日游'
-      }, {
-        id: '003',
-        url: 'http://img1.qunarzz.com/piao/fusion/1803/89/55083b0f1951f302.png',
-        desc: '两江夜游'
-      }, {
-        id: '004',
-        url: 'http://img1.qunarzz.com/piao/fusion/1803/96/c70f1e85ae4a4f02.png',
-        desc: '神秘武隆'
-      }, {
-        id: '005',
-        url: 'http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20193/338c5b924c5809e8c7b14f60a953c3e2.png',
-        desc: '欢乐谷'
-      }, {
-        id: '006',
-        url: 'http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20194/b71c1387a921ccf9c6edc7e8def3da90.png',
-        desc: '动物园景点'
-      }, {
-        id: '007',
-        url: 'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
-        desc: '热门景点'
-      }, {
-        id: '008',
-        url: 'http://mp-piao-admincp.qunarzz.com/mp_piao_admin_mp_piao_admin/admin/20194/b71c1387a921ccf9c6edc7e8def3da90.png',
-        desc: '动物园景点'
-      }, {
-        id: '009',
-        url: 'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
-        desc: '热门景点'
-      }]
+      }
     }
   },
   computed: {
     pages () {
       const pages = []
-      this.iconList.forEach((item, index) => {
+      this.list.forEach((item, index) => {
         const page = Math.floor(index / 8)
         if (!pages[page]) {
           pages[page] = []
