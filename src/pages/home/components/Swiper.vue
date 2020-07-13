@@ -15,13 +15,15 @@
 </template>
 
 <script>
+
 export default {
   name: 'HomeSwiper',
   data () {
     return {
       swiperOption: {
         pagination: '.swiper-pagination',
-        loop: true
+        loop: true,
+        autoplay: '3000'
       },
       swiperList: [{
         id: '001',

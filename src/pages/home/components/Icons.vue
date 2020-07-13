@@ -1,6 +1,6 @@
 <template>
   <div class="icons">
-    <swiper>
+    <swiper :options="swiperOption">
       <swiper-slide v-for="(page,index) of pages"
                     :key="index">
         <div class="icon"
@@ -21,6 +21,9 @@
 export default {
   data () {
     return {
+      swiperOption: {
+        autoplay: 0
+      },
       iconList: [{
         id: '001',
         url: 'http://img1.qunarzz.com/piao/fusion/1803/95/f3dd6c383aeb3b02.png',
