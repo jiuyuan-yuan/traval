@@ -219,10 +219,14 @@ export default {
 
       .star-eval {
         display: inline-block;
+        margin-top: 0.2rem;
 
         .stars-bg {
+          text-align: center;
           position: relative;
+          margin-left: -0.6rem;
           display: inline-block;
+          transform: scale(0.6);
           height: 0.38rem;
           width: 3.14rem;
           background: url('../../../assets/images/star.jpg') 0 0;
@@ -239,7 +243,8 @@ export default {
       }
 
       .desc-comment {
-        margin-left: 0.3rem;
+        margin-left: 0.2rem;
+        vertical-align: text-bottom;
       }
     }
 
