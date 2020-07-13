@@ -8,7 +8,7 @@
       输入城市/景点</div>
     <div class="header-right">
       城市
-      <sapn class="iconfont arrow-icon">&#xe62a;</sapn>
+      <span class="iconfont arrow-icon">&#xe62a;</span>
     </div>
   </div>
 </template>
