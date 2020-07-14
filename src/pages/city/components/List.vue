@@ -5,79 +5,24 @@
       <div class="area">
         <h2 class="title">热门城市</h2>
         <ul class="hot-list">
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
+          <li v-for="item of hotCities"
+              :key="item.id">{{item.name}}</li>
         </ul>
       </div>
       <div class="area">
         <h2 class="title">热门城市</h2>
         <ul class="letter-list">
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
+          <li v-for="item of arr"
+              :key="item.id">{{item}}</li>
         </ul>
       </div>
-      <div class="area">
-        <h2 class="title">A</h2>
+      <div class="area"
+           v-for="(item,keyName) of cities"
+           :key="keyName">
+        <h2 class="title">{{keyName}}</h2>
         <ul class="list">
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-        </ul>
-      </div>
-      <div class="area">
-        <h2 class="title">B</h2>
-        <ul class="list">
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
-          <li>1</li>
+          <li v-for="ele of item"
+              :key="ele.id">{{ele.name}}</li>
         </ul>
       </div>
     </div>
@@ -87,8 +32,20 @@
 <script>
 import Bsscroll from 'better-scroll'
 export default {
+  props: {
+    hotCities: Array,
+    cities: Object
+  },
+  data () {
+    return {
+      arr: []
+    }
+  },
   mounted () {
     this.scroll = new Bsscroll(this.$refs.wrapper)
+    // 生成A-Z的数组
+    this.arr = [...Array(26).keys()].map(i => String.fromCharCode(i + 65))
+    // console.log(this.arr)
   }
 }
 </script>
@@ -128,6 +85,7 @@ export default {
 
 .hot-list {
   overflow: hidden;
+  position: relative;
 
   &:before {
     content: '';
