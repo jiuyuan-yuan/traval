@@ -1,6 +1,6 @@
 <template>
   <div>
-    <home-header :city="city"></home-header>
+    <home-header></home-header>
     <home-swiper :list="swiperList"></home-swiper>
     <home-icons :list="iconList"></home-icons>
     <home-recommend :list="recommendList"></home-recommend>
@@ -18,7 +18,6 @@ import HomeWeekend from './components/Weekend'
 export default {
   data () {
     return {
-      city: '',
       // 滑动栏
       swiperList: [],
       iconList: [],
@@ -36,7 +35,7 @@ export default {
   methods: {
     async getHomeInfo () {
       const { data: res } = await this.$http.get('/api/index.json')
-      console.log(res)
+      // console.log(res)
       if (res.ret && res.data) {
         const data = res.data
         this.city = data.city

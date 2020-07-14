@@ -5,8 +5,11 @@
       <div class="area">
         <h2 class="title">热门城市</h2>
         <ul class="hot-list">
-          <li v-for="item of hotCities"
-              :key="item.id">{{item.name}}</li>
+          <router-link to="/">
+            <li v-for="item of hotCities"
+                @click="cityClick(item.name)"
+                :key="item.id">{{item.name}}</li>
+          </router-link>
         </ul>
       </div>
       <div class="area">
@@ -23,8 +26,11 @@
            :ref="key">
         <h2 class="title">{{key}}</h2>
         <ul class="list">
-          <li v-for="ele of item"
-              :key="ele.id">{{ele.name}}</li>
+          <router-link to="/">
+            <li v-for="ele of item"
+                :key="ele.id"
+                @click="cityClick(ele.name)">{{ele.name}}</li>
+          </router-link>
         </ul>
       </div>
     </div>
@@ -46,6 +52,9 @@ export default {
   methods: {
     letterClick (e) {
       this.letter = e.target.innerText
+    },
+    cityClick (city) {
+      this.$store.dispatch('changeCity', city)
     }
   },
   mounted () {
@@ -86,7 +95,7 @@ export default {
   background: #f5f5f5;
 }
 
-.hot-list > li {
+.hot-list li {
   width: 33.3%;
   height: 0.9rem;
   line-height: 0.9rem;
@@ -97,7 +106,7 @@ export default {
   float: left;
   position: relative;
   color: #212121;
-  background: #fff;
+  background: rgba(0, 0, 0, 0);
 }
 
 .hot-list {
@@ -109,20 +118,9 @@ export default {
     position: absolute;
     width: 33.33%;
     left: 33.33%;
-    height: 3.6rem;
+    height: 100%;
     border-left: 0.02rem solid #eee;
     border-right: 0.02rem solid #eee;
-    z-index: 1;
-  }
-
-  &:after {
-    content: '';
-    position: absolute;
-    width: 10%;
-    left: 75%;
-    height: 100%;
-    border-left: 0;
-    border-right: 0;
   }
 }
 
@@ -171,7 +169,7 @@ export default {
   }
 }
 
-.list>li {
+.list li {
   width: 25%;
   height: 0.9rem;
   line-height: 0.9rem;

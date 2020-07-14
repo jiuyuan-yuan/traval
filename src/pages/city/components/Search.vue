@@ -12,8 +12,9 @@
       <ul>
         <li v-for="item of list"
             :key="item.name"
-            class="search-item">
-          {{item.name}} </li>
+            class="search-item"
+            @click="cityClick(item.name)">
+          {{item.name}}</li>
         <li class="search-item"
             v-show="hasDate">
           没有相关数据</li>
@@ -34,6 +35,12 @@ export default {
       // 搜素出的内容
       list: [],
       timer: null
+    }
+  },
+  methods: {
+    cityClick (city) {
+      this.$store.dispatch('changeCity', city)
+      this.$router.push('/')
     }
   },
   mounted () {
