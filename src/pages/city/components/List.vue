@@ -10,16 +10,18 @@
         </ul>
       </div>
       <div class="area">
-        <h2 class="title">热门城市</h2>
+        <h2 class="title">字母排序</h2>
         <ul class="letter-list">
-          <li v-for="item of arr"
-              :key="item.id">{{item}}</li>
+          <li v-for="(item,key) of cities"
+              :key="key"
+              @click="letterClick">{{key}}</li>
         </ul>
       </div>
       <div class="area"
-           v-for="(item,keyName) of cities"
-           :key="keyName">
-        <h2 class="title">{{keyName}}</h2>
+           v-for="(item,key) of cities"
+           :key="key"
+           :ref="key">
+        <h2 class="title">{{key}}</h2>
         <ul class="list">
           <li v-for="ele of item"
               :key="ele.id">{{ele.name}}</li>
@@ -34,11 +36,16 @@ import Bsscroll from 'better-scroll'
 export default {
   props: {
     hotCities: Array,
-    cities: Object
+    cities: Object,
+    letter: String
   },
   data () {
     return {
-      arr: []
+    }
+  },
+  methods: {
+    letterClick (e) {
+      this.letter = e.target.innerText
     }
   },
   mounted () {
@@ -46,6 +53,16 @@ export default {
     // 生成A-Z的数组
     this.arr = [...Array(26).keys()].map(i => String.fromCharCode(i + 65))
     // console.log(this.arr)
+  },
+  watch: {
+    letter () {
+      // console.log(this.letter)
+      if (this.letter) {
+        const element = this.$refs[this.letter][0]
+        // console.log(element)
+        this.scroll.scrollToElement(element)
+      }
+    }
   }
 }
 </script>
@@ -164,7 +181,7 @@ export default {
   margin-bottom: -1px;
   float: left;
   position: relative;
-  z-index: 10;
+  z-index: 1;
   color: #212121;
 }
 </style>
