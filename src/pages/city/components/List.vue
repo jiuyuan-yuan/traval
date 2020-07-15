@@ -54,7 +54,7 @@ export default {
       this.letter = e.target.innerText
     },
     cityClick (city) {
-      this.$store.dispatch('changeCity', city)
+      this.$store.commit('changeCity', city)
     }
   },
   mounted () {
