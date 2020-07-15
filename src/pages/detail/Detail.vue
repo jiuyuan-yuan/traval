@@ -1,14 +1,18 @@
 <template>
   <div>
     <detail-banner></detail-banner>
+    <detail-header></detail-header>
+    <div style="height:50rem"></div>
   </div>
 </template>
 
 <script>
 import DetailBanner from './components/Banner'
+import DetailHeader from './components/Header'
 export default {
   components: {
-    DetailBanner
+    DetailBanner,
+    DetailHeader
   }
 }
 </script>
