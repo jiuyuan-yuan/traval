@@ -14,14 +14,19 @@ import HomeSwiper from './components/Swiper'
 import HomeIcons from './components/Icons'
 import HomeRecommend from './components/Recommend'
 import HomeWeekend from './components/Weekend'
+import { mapState } from 'vuex'
 
 export default {
   data () {
     return {
+      // 上一次的城市
+      lastCity: '',
       // 滑动栏
       swiperList: [],
       iconList: [],
+      // 详情列表
       recommendList: [],
+      // 周末去哪儿列表
       weekendList: []
     }
   },
@@ -34,7 +39,7 @@ export default {
   },
   methods: {
     async getHomeInfo () {
-      const { data: res } = await this.$http.get('/api/index.json')
+      const { data: res } = await this.$http.get('/api/index.json?city=' + this.city)
       // console.log(res)
       if (res.ret && res.data) {
         const data = res.data
@@ -47,7 +52,17 @@ export default {
     }
   },
   mounted () {
+    this.lastCity = this.city
     this.getHomeInfo()
+  },
+  computed: {
+    ...mapState(['city'])
+  },
+  activated () {
+    if (this.lastCity !== this.city) {
+      this.lastCity = this.city
+      this.getHomeInfo()
+    }
   }
 }
 </script>

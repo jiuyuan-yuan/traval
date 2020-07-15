@@ -6,9 +6,11 @@
       <span>猜你喜欢</span>
     </div>
     <ul>
-      <li class="item"
-          v-for="item of list"
-          :key="item.id">
+      <router-link class="item"
+                   tag="li"
+                   :to="'/detail/'+item.id"
+                   v-for="item of list"
+                   :key="item.id">
         <img class="img"
              :src="item.url">
         <div class="item-info">
@@ -31,7 +33,7 @@
           <span class="append-desc"
                 v-if="item.add">{{item.appendDesc}}</span>
         </div>
-      </li>
+      </router-link>
     </ul>
   </div>
 </template>
