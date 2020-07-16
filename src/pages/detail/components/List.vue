@@ -42,37 +42,43 @@
         <!-- 大标题 -->
         <h1 class="item-title">景区门票</h1>
         <!-- 动态渲染内容 -->
-        <div>
+        <div v-for="item of ticketList"
+             :key="item.id">
           <!-- 门票标题 -->
           <div class="ticket-title">
             <span class="ticket-title-icon">.</span>
-            <span>桃花源门票</span>
+            <span>{{item.name}}</span>
           </div>
 
           <!-- 门票详情 -->
-          <div class="ticket-title-info">
+          <div class="ticket-title-info"
+               v-show="handleInfo(item.info)">
             <span class="iconfont arrow">&#xe623;</span>
-            <p>含太古洞+世外桃源；优待政策</p>
+            <p>{{item.info}}</p>
           </div>
           <!-- 门票列表 -->
           <div class="ticket-list">
             <!-- 门票种类 -->
-            <div class="ticket-group">
-              <div class="ticket-name">成人票</div>
+            <div class="ticket-group"
+                 v-for="ele of item.ticketName"
+                 :key="ele.price">
+              <div class="ticket-name">{{ele.name}}</div>
               <div class="ticket-price">
                 <span>¥</span>
-                <span class="ticket-price-num">43</span>
+                <span class="ticket-price-num">{{ele.price}}</span>
                 <span>起 </span>
                 <span :class="expandIconClassName"
-                      @click.stop="expandClick">&#xe6b1;</span>
+                      @click.stop="expandClick(ele.price)">&#xe6b1;</span>
               </div>
               <!-- 票价详情 -->
               <div class="expand-item"
-                   v-show="expand">
-                <div class="ticket-price-list">
+                   v-show="expand[ele.price]">
+                <div class="ticket-price-list"
+                     v-for="listPrice of ele.list"
+                     :key="listPrice.price">
                   <!-- 详情内列表 -->
                   <div class="ticket-price-item">
-                    <p class="ticket-price-item-title">酉阳桃花源门票成人票(当日订)</p>
+                    <p class="ticket-price-item-title">{{listPrice.name}}</p>
                     <div class="ticket-price-item-detail">
                       <div class="booking-time">
                         <p>16:30前随买随用</p>
@@ -81,23 +87,7 @@
                       </div>
                       <div class="ticket-price-item-booking">
                         <span>¥</span>
-                        <span class="ticket-price-item-text">80</span>
-                        <p class="booking">立即预定</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="ticket-price-item">
-                    <p class="ticket-price-item-title">酉阳桃花源门票成人票(当日订)</p>
-                    <div class="ticket-price-item-detail">
-                      <div class="booking-time">
-                        <p>16:30前随买随用</p>
-                        <p>条件退</p>
-                        <p class="booking-time-know">蓝精灵|预定须知</p>
-                      </div>
-                      <div class="ticket-price-item-booking">
-                        <span>¥</span>
-                        <span class="ticket-price-item-text">80</span>
+                        <span class="ticket-price-item-text">{{listPrice.price}}</span>
                         <p class="booking">立即预定</p>
                       </div>
                     </div>
@@ -123,16 +113,27 @@ export default {
   data () {
     return {
       // 扩展
-      expand: false
+      expand: {
+        180: false,
+        184: false,
+        120: false
+      },
+      ticketList: []
     }
   },
   methods: {
     async getInfo () {
       const { data: res } = await this.$http.get('/api/ticket.json')
-      console.log(res)
+      if (res.ret && res.data) {
+        this.ticketList = res.data
+      }
+      // console.log(res.data)
     },
-    expandClick () {
-      this.expand = !this.expand
+    expandClick (id) {
+      this.expand[id] = !this.expand[id]
+    },
+    handleInfo (e) {
+      return e !== ''
     }
   },
   computed: {
