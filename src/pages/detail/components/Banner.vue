@@ -15,9 +15,12 @@
           30
         </div>
       </div>
-      <common-gallary :imgs="imgs"
-                      v-show="showGallary"
-                      @close="gallaryClose"></common-gallary>
+      <fade-animation>
+        <common-gallary :imgs="imgs"
+                        v-show="showGallary"
+                        @close="gallaryClose">
+        </common-gallary>
+      </fade-animation>
     </div>
     <div class="back"
          @click="handleBack">
@@ -28,6 +31,7 @@
 
 <script>
 import CommonGallary from '@/common/gallary/Gallary'
+import FadeAnimation from '@/common/fade/FadeAnimation'
 export default {
   data () {
     return {
@@ -39,7 +43,8 @@ export default {
     }
   },
   components: {
-    CommonGallary
+    CommonGallary,
+    FadeAnimation
   },
   methods: {
     bannerClick () {
@@ -71,7 +76,7 @@ export default {
     position: absolute;
     left: 0;
     right: 0;
-    bottom: 0;
+    bottom: 0.1rem;
     line-height: 0.6rem;
     display: flex;
     color: #FFF;
@@ -83,7 +88,7 @@ export default {
       bottom: 0.86rem;
 
       .banner-number {
-        padding: 0 0.4rem;
+        padding: 0 0.2rem;
         height: 0.5rem;
         line-height: 0.5rem;
         border-radius: 0.2rem;

@@ -39,6 +39,9 @@ export default {
   },
   activated () {
     window.addEventListener('scroll', this.handleScroll)
+  },
+  deactivated () {
+    window.removeEventListener('scroll', this.handleScroll)
   }
 }
 </script>
@@ -51,6 +54,7 @@ export default {
   left: 0px;
   display: block;
   background: #00bcd4;
+  z-index: 10;
 
   .back {
     position: absolute;
