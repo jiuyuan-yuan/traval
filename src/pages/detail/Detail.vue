@@ -5,6 +5,8 @@
     <div class="content">
       <detail-list :list="list"></detail-list>
     </div>
+    <detail-comment></detail-comment>
+    <detail-maylike></detail-maylike>
   </div>
 </template>
 
@@ -12,11 +14,15 @@
 import DetailBanner from './components/Banner'
 import DetailHeader from './components/Header'
 import DetailList from './components/List'
+import DetailComment from './components/Comment'
+import DetailMaylike from './components/Maylike'
 export default {
   components: {
     DetailBanner,
     DetailHeader,
-    DetailList
+    DetailList,
+    DetailComment,
+    DetailMaylike
   },
   data () {
     return {

@@ -72,7 +72,7 @@
               </div>
               <!-- 票价详情 -->
               <div class="expand-item"
-                   v-show="expand[ele.price]">
+                   v-show="activeIndex===ele.price">
                 <div class="ticket-price-list"
                      v-for="listPrice of ele.list"
                      :key="listPrice.price">
@@ -100,7 +100,9 @@
         </div>
         <!-- 动态内容结束 -->
       </div>
+
     </div>
+
   </div>
 </template>
 
@@ -113,11 +115,7 @@ export default {
   data () {
     return {
       // 扩展
-      expand: {
-        180: false,
-        184: false,
-        120: false
-      },
+      activeIndex: 0,
       ticketList: []
     }
   },
@@ -130,7 +128,11 @@ export default {
       // console.log(res.data)
     },
     expandClick (id) {
-      this.expand[id] = !this.expand[id]
+      if (this.activeIndex === id) {
+        this.activeIndex = 0
+        return
+      }
+      this.activeIndex = id
     },
     handleInfo (e) {
       return e !== ''
@@ -253,8 +255,6 @@ export default {
 }
 
 .ticket-container {
-  height: 5rem;
-
   .item-title {
     overflow: hidden;
     position: relative;
